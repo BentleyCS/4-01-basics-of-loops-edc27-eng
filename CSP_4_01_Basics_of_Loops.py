@@ -1,13 +1,26 @@
 #All questions must use a loop for full points.
+import random
+from itertools import count
 
-def oddNumbers(n:int) ->str:
+
+def oddNumbers(n:int)-> str:
     """
-    Print out all odd numbers from 1 to n(inclusive) in a single string seperated by spaces.
+    Print out all odd numbers from 1 to n(inclusive) in a single string separated by spaces.
     example oddNumbers(5) -> "1 3 5"
     example oddNumbers(8) -> "1 3 5 7"
     example oddNumbers(-8) -> ""
     """
-
+    odd = ""
+    for i in range(1,n+1,1):
+        if i<n:
+            if i%2 != 0:
+                odd+= str(i)
+            elif i%2 == 0:
+                odd+= " "
+        if i==n and i%2==1:
+            odd+= str(i)
+    print(odd)
+    return odd
 
 def backwards(n)-> int:
     """
@@ -17,7 +30,14 @@ def backwards(n)-> int:
     example backwards(8) -> "8 7 6 5 4 3 2 1"
     example backwards(-2) -> ""
     """
-
+    back = ""
+    for i in range (n,0,-1):
+        if i>1:
+            back += str(i)+" "
+        elif i == 1:
+            back+="1"
+    print(back)
+    return back
 
 
 def randomRepeating():
@@ -27,8 +47,13 @@ def randomRepeating():
     NOTE: Given randomness no test for this question
     :return:
     """
+    roll = random.randint(1,10)
     tries = 0
+    while roll in range(1,9):
+        tries+= 1
+        roll = random.randint(1, 10)
     print(f"it took {tries} tries to get a 10")
+
 def randomRange(n):
     """
     Generate a random number from 1 to 100 n number of times. Then after that is
@@ -37,12 +62,30 @@ def randomRange(n):
     :param n:
     :return:
     """
+    gen = random.randint(1,100)
+    nums = []
+    for i in range(0,n,1):
+        nums.append(gen)
+        gen = random.randint(1,100)
+    nums.sort()
+    last = len(nums)-1
+    smlst = nums[0]
+    bgst = nums[last]
+    print(nums)
+    print(f"{smlst} and {bgst}")
+    return smlst, bgst
+
 def reverse(word:str)->str:
     """
     Takes in a string as an argument and return the given string in reverse.
     example reverse("cat") -> "tac"
     example reverse("Hello") -> "olleH"
     """
+    wLength = len(word)-1
+    rev = ""
+    for i in range(wLength,-1,-1):
+        rev += word[i]
+    return rev
 
 def fizzBuzzContinuous(n):
     """
@@ -58,6 +101,19 @@ def fizzBuzzContinuous(n):
     :param n:
     :return:
     """
+    order = ""
+    endOrder = len(order)
+    for i in range(1,n+1,1):
+        if i%15 == 0:
+            order += "fizzbuzz "
+        elif i%3 == 0:
+            order += "fizz "
+        elif i%5 == 0:
+            order += "buzz "
+        else:
+            order += str(i)+" "
+    return order[0:-1]
+
 
 def collatz(n):
     """
@@ -69,7 +125,17 @@ def collatz(n):
     :param n:
     :return:
     """
-
+    col = " "
+    i = n
+    while i != 1:
+        if i %2 == 0:
+            i = i//2
+            col += str(i) + " "
+        elif i%2 == 1:
+            i = (3*i) + 1
+            col += str(i) + " "
+    cola = (str(n) + col[0:-1])
+    return cola
 
 def fibonacci(n):
     """
@@ -83,6 +149,16 @@ def fibonacci(n):
     :param n:
     :return:
     """
+    fib = [0,1]
+    newN = 0
+    if n <= 1:
+        return str(fib[0])
+    while len(fib) <= n:
+        newN = fib[-1] + fib[-2]
+        fib.append(newN)
+    space = " "
+    newFib = space.join(str(i) for i in fib)
+    return newFib
 
 
-print(fibonacci(300))
+#print(fibonacci(300))
